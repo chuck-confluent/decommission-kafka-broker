@@ -9,7 +9,7 @@ scratch repo to test manual scaling of a kafka cluster using only apache kafka t
 ### Start Cluster
 
 ```
-docker compose up -d zookeeper broker1 broker2 broker3
+docker compose up -d
 ```
 
 ### List topics
