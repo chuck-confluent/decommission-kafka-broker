@@ -1,8 +1,16 @@
-# decommission-kafka-broker
-scratch repo to test manual decommission of a kafka broker using only apache kafka tools. Then, we would compare to cluster expansion/shrink in the Confluent Cloud Console.
+Work in progress
+
+# Kafka Elasticity
+scratch repo to test manual scaling of a kafka cluster using only apache kafka tools. Then, we would compare to cluster expansion/shrink in the Confluent Cloud Console.
 
 
 ## Cheat sheet
+
+### Start Cluster
+
+```
+docker compose up -d zookeeper broker1 broker2 broker3
+```
 
 ### List topics
 ```
@@ -11,12 +19,22 @@ docker compose exec broker1 \
     --list
 ```
 
-## Steps to decommission a broker
+## Steps to Decommission a broker
 
 ### Pick a broker to decommission (don't kill the controller!)
 
 ### Find out the partitions for which that broker is the leader
 
-### Reassign Partitions (sucks for any new partitions getting created -- they may be unavailable)
+### Manually Reassign Partitions (with throttle)
+
+### Remove Throttle
 
 ### Gracefully kill broker
+
+## Steps to Add a Broker
+
+### Start Broker
+
+### Manually Reassign Partitions (with throttle)
+
+### Remove throttle
