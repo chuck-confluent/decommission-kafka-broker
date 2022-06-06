@@ -124,6 +124,9 @@ docker compose exec broker1 \
         --throttle 1000000
 ```
 
+Go back to the producer and consumer applications to see any logs related to the partition migration.
+
+
 Verify the throttle has been set.
 ```
 docker compose exec broker1 \
@@ -192,6 +195,8 @@ docker compose exec broker1 \
         --execute \
         --throttle 1000000
 ```
+
+Go back to the producer and consumer applications to see any logs related to the partition migration.
 
 Check that the migration was successful and the throttles were removed.
 
