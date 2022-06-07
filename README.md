@@ -1,5 +1,3 @@
-Work in progress
-
 # Kafka Elasticity
 
 Apache Kafka supports adding and subtracting brokers to respond to changes in demand. However, this must be done carefully. This repo demonstrates the steps required to expand and shrink a Kafka cluster.
