@@ -1,8 +1,8 @@
 # Kafka Elasticity
 
-Apache Kafka supports adding and subtracting brokers to respond to changes in demand. However, this must be done carefully. This repo demonstrates the steps required to expand and shrink a Kafka cluster.
+Apache Kafka supports adding and subtracting brokers to respond to changes in demand. However, this must be done carefully. This repo demonstrates the simplest steps required to expand and shrink a Kafka cluster using only Apache Kafka tools. More advanced data balancing that takes into account broker load would require tools outside of Apache Kafka, like the open source [Cruise Control](https://github.com/linkedin/cruise-control) from LinkedIn. Cruise Control comes with its own operational overhead, and scaling would then require interacting with a REST API.
 
-Confluent has re-architected Apache Kafka to offer cloud-native elasticity in Confluent Cloud. Compare the steps here to the experience of using Confluent Cloud, which supports autoscaling for basic and standard clusters, and a 1-click scale up/down experience with dedicated clusters.
+Confluent has re-architected Apache Kafka to offer cloud-native elasticity in Confluent Cloud. Compare the steps here to the experience of using Confluent Cloud, which supports autoscaling for basic and standard clusters, and a 1-click scale up/down experience with dedicated clusters. This is made possible by Confluent's Self Balancing Clusters product that fully automates data balancing, scaling up, and scaling down.
 
 
 ## Initialize Cluster and Topic
@@ -153,6 +153,8 @@ docker compose exec broker1 \
     --describe --topic test
 ```
 
+Note that now, even with a balanced cluster, running `kafka-reassign-partitions --generate` with `--brokers "4,3,2,1"` instead of `--brokers "1,2,3,4"` would produce a completely different partition assignment strategy for no good reason.
+
 ## Steps to Decommission a broker
 ### Pick a broker to decommission (don't kill the controller!)
 
@@ -172,8 +174,7 @@ docker compose exec broker1 \
     kafka-reassign-partitions \
         --bootstrap-server broker1:29091,broker2:29092,broker3:29093 \
         --topics-to-move-json-file /tmp/reassignment-files/topics-to-move.json \
-        --broker-list "1,2,3" \  
-        --generate \
+        --broker-list "1,2,3" --generate \
     > ./reassignment-files/decommission.json
 ```
 
