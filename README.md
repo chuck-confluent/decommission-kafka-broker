@@ -111,7 +111,7 @@ The resulting file should look like this:
 {"version":1,"partitions":[{"topic":"test","partition":0,"replicas":[1,4,2],"log_dirs":["any","any","any"]},{"topic":"test","partition":1,"replicas":[2,1,3],"log_dirs":["any","any","any"]},{"topic":"test","partition":2,"replicas":[3,2,4],"log_dirs":["any","any","any"]},{"topic":"test","partition":3,"replicas":[4,3,1],"log_dirs":["any","any","any"]},{"topic":"test","partition":4,"replicas":[1,2,3],"log_dirs":["any","any","any"]},{"topic":"test","partition":5,"replicas":[2,3,4],"log_dirs":["any","any","any"]},{"topic":"test","partition":6,"replicas":[3,4,1],"log_dirs":["any","any","any"]},{"topic":"test","partition":7,"replicas":[4,1,2],"log_dirs":["any","any","any"]}]}
 ```
 
-Execute the reassignment plan with throttling set to 1MBps.
+Execute the reassignment plan with throttling set to 1MBps. Note that this throttle needs to be set carefully. If it is too high, then inter-broker replication traffic can saturate the network and affect client applications. If it is too low and there is a lot of data to move, it may take a very long time to balance the cluster.
 
 ```
 docker compose exec broker1 \
