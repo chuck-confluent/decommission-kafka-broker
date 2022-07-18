@@ -1,5 +1,7 @@
 # Kafka Elasticity
 
+View the [video recording here](https://www.confluent.io/resources/online-talk/10x-apache-kafka-elasticity/)!
+
 Apache Kafka supports adding and subtracting brokers to respond to changes in demand. However, this must be done carefully. This repo demonstrates the simplest steps required to expand and shrink a Kafka cluster using only Apache Kafka tools. More advanced data balancing that takes into account broker load would require tools outside of Apache Kafka, like the open source [Cruise Control](https://github.com/linkedin/cruise-control) from LinkedIn. Cruise Control comes with its own operational overhead, and scaling would then require interacting with a REST API.
 
 Confluent has re-architected Apache Kafka to offer cloud-native elasticity in Confluent Cloud. Compare the steps here to the experience of using Confluent Cloud, which supports autoscaling for basic and standard clusters, and a 1-click scale up/down experience with dedicated clusters. This is made possible by Confluent's Self Balancing Clusters product that fully automates data balancing, scaling up, and scaling down.
